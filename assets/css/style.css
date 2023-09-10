@@ -12,3 +12,8 @@ body {
 .btn:hover {
     background-color: #d7c9e3;
 }
+
+a {
+    text-decoration-line: none;
+    color: inherit;
+}
