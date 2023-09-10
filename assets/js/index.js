@@ -2,6 +2,7 @@ const timeEl= document.getElementById('time');
 const startBtn = document.getElementById('start');
 const questionContainerEl = document.getElementById('question-container');
 const answerContainerEl = document.getElementById('answer-container');
+const initialContainerEl = document.getElementById('initial-container');
 
 
 let score = 0;
@@ -56,3 +57,24 @@ const questions = [
         ]
     }
 ];
+
+
+const displayQuestion = () => {
+
+    questionContainerEl.innerHTML = questions[questionIndex].question;
+    answerContainerEl.innerHTML = '';
+    const answers = questions[questionIndex].answers;
+    console.log(answers);
+    answers.map(answer => {
+        const button = document.createElement('button');
+        button.innerText = answer.text;
+        button.classList.add('btn', 'btn-primary', 'p-3', 'm-3', 'w-25', 'text-left', 'btn-lg');
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        answerContainerEl.appendChild(button);
+    });
+}
+
+displayQuestion();
+
