@@ -1,3 +1,14 @@
-* {
-    margin-top: 50px;
+body {
+    font-weight: bolder;
+    background-color:#e4dbec;
+    color:#6d4591;
+}
+
+.btn {
+    background-color:#6d4591;
+    color: #e4dbec;
+}
+
+.btn:hover {
+    background-color: #d7c9e3;
 }
