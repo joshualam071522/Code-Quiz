@@ -13,6 +13,7 @@ const endGameContainerEl = document.getElementById('end-game-container');
 const initialsInputEl = document.getElementById('initials');
 const submitBtnEl = document.getElementById('submit');
 const finalScoreEl = document.getElementById('final-score');
+const navbarEl = document.getElementById('navbar');
 
 const highscoreLocalStorage = JSON.parse(localStorage.getItem('highscores')) || [];
 
@@ -81,6 +82,7 @@ const endQuiz = () => {
     answerContainerEl.innerHTML = '';
     endGameContainerEl.classList.remove('d-none');
     endGameContainerEl.classList.add('d-flex', 'flex-column', 'justify-content-center', 'align-items-center');
+    goBackBtnEl.classList.remove('d-none');
 
     if (timeLeft + score < 0) {
         finalScoreEl.textContent = 0;
@@ -126,6 +128,9 @@ const displayQuestion = () => {
 }
 
 const startQuiz = () => {
+    viewHighscoreEl.classList.add('d-none');
+    navbarEl.classList.remove('justify-content-between');
+    navbarEl.classList.add('justify-content-end');
     questionIndex = 0;
     initialContainerEl.style.display = 'none';
     displayQuestion();
@@ -140,7 +145,7 @@ const startQuiz = () => {
             clearInterval(timer);
             endQuiz();
         }
-    }, 1000);
+    }, 500);
 }
 const displayHighscore = () => {
     questionContainerEl.innerHTML = '';

@@ -9,15 +9,11 @@
 </head>
 <body>
     <div id="container" class="container d-flex flex-column justify-content-center w-100">
-        <nav class="d-flex flex-row justify-content-between pt-5 fs-3">
-            <a class="nav-link" id="view-highscore">View Highscores</a>
+        <nav id="navbar" class="d-flex flex-row justify-content-between pt-5 fs-3">
+            <a id="view-highscore">View Highscores</a>
             <p id="time">Time Left: <span id="time-integer"></span></h3>
         </nav>
-        <div id="highscore-container" class="d-flex flex-column align-items-center fs-2"></div>
-        <div id="clear-highscore-container" class="d-flex flex-row justify-content-around">
-            <button id="go-back" class="btn w-25 text-wrap btn-lg">Go Back</button>
-            <button id="clear-highscore" class="btn w-25 text-wrap btn-lg">Clear Highscores</button>
-        </div>
+        <div id="highscore-container" class="d-flex flex-column align-items-center fs-2 pt-5"></div>
         <div id="end-game-container">
             <H1 class="py-5">The quiz has ended!</H1>
             <h3 class="pb-5">Your final score is: <span id="final-score"></span> pts</h3>
@@ -26,6 +22,10 @@
                 <input type="text" id="initials" name="initials" placeholder="JL">
                 <button id="submit" class="btn btn-lg">Submit</button>
             </form>
+        </div>
+        <div id="clear-highscore-container" class="d-flex flex-row justify-content-around pt-5">
+            <button id="go-back" class="btn w-25 text-wrap btn-lg">Go Back</button>
+            <button id="clear-highscore" class="btn w-25 text-wrap btn-lg">Clear Highscores</button>
         </div>
         <div id="initial-container" class="text-center pt-5">
             <p class="pt-5 fs-1">Code Quiz</h1>
