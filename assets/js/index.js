@@ -190,7 +190,6 @@ submitBtnEl.addEventListener('click', (e) => {
     highscoreLocalStorage.push(highscore);
     highscoreLocalStorage.sort((a, b) => b.score - a.score);
     localStorage.setItem('highscores', JSON.stringify(highscoreLocalStorage));
-    endGameContainerEl.style.display = 'none';
     displayHighscore();
 });
 
