@@ -1,5 +1,5 @@
-const time= document.getElementById('time');
-const startBtn = document.getElementById('start');
+const timeEl= document.getElementById('time');
+const startBtnEl = document.getElementById('start');
 const questionContainerEl = document.getElementById('question-container');
 const answerContainerEl = document.getElementById('answer-container');
 const initialContainerEl = document.getElementById('initial-container');
@@ -7,6 +7,7 @@ const initialContainerEl = document.getElementById('initial-container');
 
 let score = 0;
 let timeLeft = 60;
+time.textContent = timeLeft;
 
 let questionIndex = 0;
 
@@ -58,10 +59,13 @@ const questions = [
     }
 ];
 
+
 const endQuiz = () => {
     questionContainerEl.innerHTML = '';
     answerContainerEl.innerHTML = '';
     initialContainerEl.style.display = 'block';
+    timeLeft = 60;
+    time.textContent = timeLeft;
 }
 
 const selectAnswer = (e) => {
@@ -97,4 +101,22 @@ const displayQuestion = () => {
     });
 }
 
-displayQuestion();
+const startQuiz = () => {
+    questionIndex = 0;
+    initialContainerEl.style.display = 'none';
+    displayQuestion();
+    const timer = setInterval(() => {
+        timeLeft--;
+        time.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            endQuiz();
+        } else if (questionIndex >= questions.length) {
+            clearInterval(timer);
+            endQuiz();
+        }
+    }, 1000);
+}
+
+startBtnEl.addEventListener('click', startQuiz);
