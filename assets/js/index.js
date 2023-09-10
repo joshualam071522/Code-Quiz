@@ -1,13 +1,28 @@
 const timeEl= document.getElementById('time');
+const timeIntegerEl = document.getElementById('time-integer');
 const startBtnEl = document.getElementById('start');
 const questionContainerEl = document.getElementById('question-container');
 const answerContainerEl = document.getElementById('answer-container');
 const initialContainerEl = document.getElementById('initial-container');
+const highscoreContainerEl = document.getElementById('highscore-container');
+const viewHighscoreEl = document.getElementById('view-highscore');
+const clearHighscoreContainerEl = document.getElementById('clear-highscore-container');
+const goBackBtnEl = document.getElementById('go-back');
+const clearHighscoreBtnEl = document.getElementById('clear-highscore');
+const endGameContainerEl = document.getElementById('end-game-container');
+const initialsInputEl = document.getElementById('initials');
+const submitBtnEl = document.getElementById('submit');
+
+const highscoreLocalStorage = JSON.parse(localStorage.getItem('highscores')) || [];
+
+endGameContainerEl.style.display = 'none';
+goBackBtnEl.style.display = 'none';
+clearHighscoreBtnEl.style.display = 'none';
 
 
 let score = 0;
-let timeLeft = 60;
-time.textContent = timeLeft;
+let timeLeft = 30;
+timeIntegerEl.textContent = timeLeft;
 
 let questionIndex = 0;
 
@@ -63,9 +78,7 @@ const questions = [
 const endQuiz = () => {
     questionContainerEl.innerHTML = '';
     answerContainerEl.innerHTML = '';
-    initialContainerEl.style.display = 'block';
-    timeLeft = 60;
-    time.textContent = timeLeft;
+    endGameContainerEl.style.display = 'block';
 }
 
 const selectAnswer = (e) => {
@@ -107,7 +120,7 @@ const startQuiz = () => {
     displayQuestion();
     const timer = setInterval(() => {
         timeLeft--;
-        time.textContent = timeLeft;
+        timeIntegerEl.textContent = timeLeft;
 
         if (timeLeft <= 0) {
             clearInterval(timer);
@@ -118,5 +131,48 @@ const startQuiz = () => {
         }
     }, 1000);
 }
+const displayHighscore = () => {
+    highscoreContainerEl.innerHTML = '';
+    const highscoreListEl = document.createElement('ol');
+    
+    if (highscoreLocalStorage.length < 1) {
+        const NoHighscoreEL = document.createElement('h1')
+        NoHighscoreEL.textContent = 'No highscores yet!';
+        highscoreContainerEl.appendChild(NoHighscoreEL);
+    } else { 
+        highscoreLocalStorage.map(highscore => {
+        const highscoreEl = document.createElement('li');
+        highscoreEl.textContent = `${highscore.initials} - ${highscore.score}`;
+        highscoreListEl.appendChild(highscoreEl);
+        highscoreContainerEl.appendChild(highscoreListEl);
+        });
+    }
+}
+
+viewHighscoreEl.addEventListener('click', () => {
+    initialContainerEl.style.display = 'none';
+    questionContainerEl.innerHTML = '';
+    answerContainerEl.innerHTML = '';
+    viewHighscoreEl.style.display = 'none';
+    displayHighscore();
+});
+
+submitBtnEl.addEventListener('click', () => {
+    const initials = initialsInputEl.value;
+    const highscore = {
+        initials: initials,
+        score: timeLeft + score,
+    };
+    highscoreLocalStorage.push(highscore);
+    highscoreLocalStorage.sort((a, b) => b.score - a.score);
+    localStorage.setItem('highscores', JSON.stringify(highscoreLocalStorage));
+    endGameContainerEl.style.display = 'none';
+});
+
+
 
 startBtnEl.addEventListener('click', startQuiz);
+
+goBackBtnEl.addEventListener('click', () => {
+    location.reload();
+});

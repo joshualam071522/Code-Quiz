@@ -9,10 +9,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <nav class="d-flex justify-content-between pt-5">
-                <a class="nav-link">View Highscores</a>
-                <h3>Time Left: <span id="time"></span></h3>
+                <a class="nav-link" id="view-highscore">View Highscores</a>
+                <h3 id="time">Time Left: <span id="time-integer"></span></h3>
             </nav>
             <div id="initial-container" class="text-center pt-5">
                 <h1 class="pt-5">Code Quiz</h1>
@@ -21,6 +21,20 @@
             </div>
             <div id="question-container"></div>
             <div id="answer-container" class="d-flex flex-column"></div>
+            <div id="highscore-container" class="d-flex justify-content-center"></div>
+            <div id="clear-highscore-container" class="d-flex justify-content-around w-50">
+                <button id="go-back" class="btn btn-primary w-25">Go Back</button>
+                <button id="clear-highscore" class="btn btn-primary w-25">Clear Highscores</button>
+            </div>
+            <div id="end-game-container">
+                <H1>The quiz has ended!</H1>
+                <h3>Your final score is <span id="final-score"></span></h3>
+                <form id="initial-form">
+                    <label for="initials">Enter Initials:</label>
+                    <input type="text" id="initials" name="initials" placeholder="JL">
+                    <button id="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
 
     
