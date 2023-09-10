@@ -118,7 +118,7 @@ const displayQuestion = () => {
     answers.map(answer => {
         const button = document.createElement('button');
         button.innerText = answer.text;
-        button.classList.add('btn', 'btn-primary', 'p-3', 'm-3', 'w-25', 'text-left', 'btn-lg');
+        button.classList.add('btn', 'p-3', 'm-3', 'w-25', 'text-left', 'btn-lg');
         if (answer.correct) {
             button.dataset.correct = answer.correct;
         }
