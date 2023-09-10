@@ -1,4 +1,4 @@
-const timeEl= document.getElementById('time');
+const time= document.getElementById('time');
 const startBtn = document.getElementById('start');
 const questionContainerEl = document.getElementById('question-container');
 const answerContainerEl = document.getElementById('answer-container');
@@ -58,13 +58,33 @@ const questions = [
     }
 ];
 
+const endQuiz = () => {
+    questionContainerEl.innerHTML = '';
+    answerContainerEl.innerHTML = '';
+    initialContainerEl.style.display = 'block';
+}
+
+const selectAnswer = (e) => {
+    const selectedBtn = e.target;
+    const correct = selectedBtn.dataset.correct;
+    if (correct) {
+        ++score;
+    } else {
+        timeLeft -= 5;
+    }
+    questionIndex++;
+    if (questionIndex < questions.length) {
+        displayQuestion();
+    } else {
+        endQuiz();
+    }
+}
 
 const displayQuestion = () => {
 
     questionContainerEl.innerHTML = questions[questionIndex].question;
     answerContainerEl.innerHTML = '';
     const answers = questions[questionIndex].answers;
-    console.log(answers);
     answers.map(answer => {
         const button = document.createElement('button');
         button.innerText = answer.text;
@@ -72,9 +92,9 @@ const displayQuestion = () => {
         if (answer.correct) {
             button.dataset.correct = answer.correct;
         }
+        button.addEventListener('click', selectAnswer);
         answerContainerEl.appendChild(button);
     });
 }
 
 displayQuestion();
-
